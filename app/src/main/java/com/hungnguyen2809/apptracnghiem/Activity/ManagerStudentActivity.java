@@ -28,6 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hungnguyen2809.apptracnghiem.Adapter.AdapterStudent;
+import com.hungnguyen2809.apptracnghiem.Class.Server;
 import com.hungnguyen2809.apptracnghiem.Class.StringURL;
 import com.hungnguyen2809.apptracnghiem.Class.Student;
 import com.hungnguyen2809.apptracnghiem.MainActivity;
@@ -156,7 +157,14 @@ public class ManagerStudentActivity extends AppCompatActivity {
             }
             txtLop.setText("Danh sách lớp: " + lop);
             UpdateData();
+            SyncAllStudentOnDevice(dsStudent);
         }
+    }
+
+    private void SyncAllStudentOnDevice(ArrayList<Student> arrayStudent) {
+        /*Server.mySocket.connect();*/
+        Server.mySocket.emit("client-send-all-question", arrayStudent);
+        /*Server.mySocket.close();*/
     }
 
     private void ReadAllClassFromServer(String url){
@@ -239,7 +247,6 @@ public class ManagerStudentActivity extends AppCompatActivity {
             UpdateData();
         }
     }
-
 
     private void Mapping(){
         listViewStudent = (ListView) findViewById(R.id.listViewStudent);

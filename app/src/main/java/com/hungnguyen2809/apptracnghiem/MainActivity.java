@@ -12,7 +12,15 @@ import android.widget.Toast;
 import com.hungnguyen2809.apptracnghiem.Activity.ChooseOptionActivity;
 import com.hungnguyen2809.apptracnghiem.Activity.ResultExamActivity;
 import com.hungnguyen2809.apptracnghiem.Class.Account;
+import com.hungnguyen2809.apptracnghiem.Class.Server;
 import com.hungnguyen2809.apptracnghiem.DatabaseManager.Database;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 public class MainActivity extends AppCompatActivity {
     EditText edtUsername, edtPassword;
@@ -26,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Server.mySocket.connect();
 
         Mapping();
         database = new Database(this, "DBQuestion", null, 1);
@@ -59,6 +68,57 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void UpdateOnServer(){
+        Server.mySocket.on("server-send-all-question", UpdateQuestion);
+        Server.mySocket.on("'server-send-all-student", UpdateStudent);
+    }
+
+    private Emitter.Listener UpdateQuestion = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSONArray dataQuestion = new JSONArray(args[0]);
+                        for(int i=0; i<dataQuestion.length(); i++){
+                            JSONObject question = dataQuestion.getJSONObject(i);
+                            /**
+                             *
+                             *
+                             * */
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener UpdateStudent = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSONArray dataStudent = new JSONArray(args[0]);
+                        for (int i=0; i<dataStudent.length(); i++){
+                            JSONObject student = dataStudent.getJSONObject(i);
+                            /**
+                             *
+                             *
+                             * */
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
 
     private boolean LoginAdmin(){
         String user = edtUsername.getText().toString().trim();
@@ -104,5 +164,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        Server.mySocket.close();
+        super.onDestroy();
+    }
 }

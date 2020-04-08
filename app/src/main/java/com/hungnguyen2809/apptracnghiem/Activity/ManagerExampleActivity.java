@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hungnguyen2809.apptracnghiem.Adapter.AdapterQuestion;
 import com.hungnguyen2809.apptracnghiem.Class.Question;
+import com.hungnguyen2809.apptracnghiem.Class.Server;
 import com.hungnguyen2809.apptracnghiem.Class.StringURL;
 import com.hungnguyen2809.apptracnghiem.MainActivity;
 import com.hungnguyen2809.apptracnghiem.R;
@@ -69,7 +70,6 @@ public class ManagerExampleActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     @Override
@@ -133,6 +133,12 @@ public class ManagerExampleActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void SyncQuestionOnAllDevice(ArrayList<Question> arrayQuestion) {
+        /*Server.mySocket.connect();*/
+        Server.mySocket.emit("client-send-all-student", arrayQuestion);
+       /* Server.mySocket.close();*/
+    }
+
     private void DeleteAllQuestion() {
         AlertDialog.Builder delete = new AlertDialog.Builder(this);
         delete.setTitle("Cảnh báo !");
@@ -176,6 +182,7 @@ public class ManagerExampleActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         UpdateData();
+                        SyncQuestionOnAllDevice(arrayListQuestion);
                     }
                 },
                 new Response.ErrorListener() {
