@@ -91,7 +91,7 @@ public class ChooseOptionActivity extends AppCompatActivity {
         if (MainActivity.CheckedFirst.equals(ResultExamActivity.CheckedLast)){
             return true;
         }
-        else  return false;
+        else return false;
     }
 
     @Override

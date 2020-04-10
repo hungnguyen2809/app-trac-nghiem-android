@@ -7,9 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.JsonWriter;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,11 +23,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hungnguyen2809.apptracnghiem.Adapter.AdapterStudent;
-import com.hungnguyen2809.apptracnghiem.Class.Server;
 import com.hungnguyen2809.apptracnghiem.Class.StringURL;
 import com.hungnguyen2809.apptracnghiem.Class.Student;
 import com.hungnguyen2809.apptracnghiem.MainActivity;
@@ -39,20 +35,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class ManagerStudentActivity extends AppCompatActivity {
     ListView listViewStudent;
     TextView txtLop;
-    public static ArrayList<Student> dsStudent;
-    public static AdapterStudent adapterStudent;
+    ArrayList<Student> dsStudent;
+    AdapterStudent adapterStudent;
     ArrayList<String> listClassName;
     ArrayList<Student> dsStudentWhereClass;
 
@@ -135,7 +126,7 @@ public class ManagerStudentActivity extends AppCompatActivity {
     }
 
     private void GetAllStudentFromServer(){
-        Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.show_all_class_server);
         ListView listClass = (ListView) dialog.findViewById(R.id.listViewClass);
 
@@ -146,6 +137,7 @@ public class ManagerStudentActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GetAllStudentFromClass(StringURL.urlGetAllStudentWhereClass, listClassName.get(position), position);
+                dialog.dismiss();
             }
         });
         dialog.show();
@@ -156,22 +148,14 @@ public class ManagerStudentActivity extends AppCompatActivity {
             Toast.makeText(this, "Bạn cần xóa dữ liệu của lớp trước !", Toast.LENGTH_SHORT).show();
         }
         else {
-            SyncAllStudentOnDevice(dsStudentWhereClass);
+            for (Student student : dsStudentWhereClass){
+                MainActivity.database.InsertStudent(student);
+            }
             txtLop.setText("Danh sách lớp: " + lop);
+            UpdateData();
         }
     }
 
-    private void SyncAllStudentOnDevice(ArrayList<Student> arrayStudent) {
-        for (Student student : arrayStudent){
-            StringWriter output = new StringWriter();
-            try {
-                WriteObjectToJson(output, student);
-                Server.mySocket.emit("client-send-all-student", output);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     private void ReadAllClassFromServer(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -215,23 +199,12 @@ public class ManagerStudentActivity extends AppCompatActivity {
     private void DeleteAllStudent(){
         AlertDialog.Builder delete = new AlertDialog.Builder(this);
         delete.setTitle("Cảnh báo !");
-        delete.setMessage("Bạn có chắc muốn xóa toàn bộ học sinh ở trong lớp này không ?\nVà khi xóa nó sẽ xóa toàn bộ tất cả những học sinh trên tất cả các thiết bị ?");
+        delete.setMessage("Bạn có chắc muốn xóa toàn bộ học sinh ở trong lớp này không ?");
         delete.setPositiveButton("Xóa tất cả", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.database.DeleteAllStudent();
                 txtLop.setText("Danh sách lớp đang trống !");
-                DeleteAllStudentAllDevice("delete");
-                Toast.makeText(ManagerStudentActivity.this, "Xóa thành công !", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-        delete.setPositiveButton("Chỉ máy hiện tại", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MainActivity.database.DeleteAllStudent();
-                txtLop.setText("Danh sách lớp đang trống !");
-                DeleteAllStudentAllDevice("xxx");
                 Toast.makeText(ManagerStudentActivity.this, "Xóa thành công !", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -244,11 +217,7 @@ public class ManagerStudentActivity extends AppCompatActivity {
         delete.show();
     }
 
-    private void DeleteAllStudentAllDevice(String query){
-        Server.mySocket.emit("delete-all-student", query);
-    }
-
-    public static void UpdateData() {
+    private void UpdateData() {
         dsStudent.clear();
         for (Student st : MainActivity.database.GetAllDataStudent()){
             dsStudent.add(st);
@@ -273,13 +242,4 @@ public class ManagerStudentActivity extends AppCompatActivity {
         txtLop = (TextView) findViewById(R.id.textViewLop);
     }
 
-    private void WriteObjectToJson(Writer output, Student student) throws IOException {
-        JsonWriter jsonWriter = new JsonWriter(output);
-        jsonWriter.beginObject();
-        jsonWriter.name("MSV").value(student.getMsv());
-        jsonWriter.name("Name").value(student.getName());
-        jsonWriter.name("Lop").value(student.getLop());
-        jsonWriter.name("Point").value(student.getCountAnswer());
-        jsonWriter.endObject();
-    }
 }

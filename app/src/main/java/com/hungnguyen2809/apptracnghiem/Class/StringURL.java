@@ -5,5 +5,4 @@ public class StringURL {
     public static String urlGetAllStudentWhereClass = "http://hungnguyen2809.000webhostapp.com/AppTracNghiem/GetListStudentFromClass.php";
     public static String urlUpdatePointForStudent = "http://hungnguyen2809.000webhostapp.com/AppTracNghiem/UpdatepointForStudent.php";
     public static String urlGetAllQuestionFromServer = "http://hungnguyen2809.000webhostapp.com/AppTracNghiem/GetAllQuestion.php";
-    public static String urlServer = "http://192.168.1.10:3000/";
 }

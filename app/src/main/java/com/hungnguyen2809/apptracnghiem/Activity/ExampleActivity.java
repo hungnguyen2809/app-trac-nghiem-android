@@ -291,25 +291,4 @@ public class ExampleActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
-    protected void onPause() {
-        AlertDialog.Builder exit = new AlertDialog.Builder(this);
-        exit.setTitle("Cảnh báo !");
-        exit.setMessage("Bạn đang trong quá trình làm bài thi nếu mà bạn thoát ra thì sẽ không thể tiếp tục làm bài thi được nữa !\n" +
-                "Bạn có chắc muốn thoát ?");
-        exit.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                EndActivityExam();
-            }
-        });
-        exit.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onResume();
-            }
-        });
-        exit.show();
-        super.onPause();
-    }*/
 }

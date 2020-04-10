@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonWriter;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +24,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hungnguyen2809.apptracnghiem.Adapter.AdapterQuestion;
 import com.hungnguyen2809.apptracnghiem.Class.Question;
-import com.hungnguyen2809.apptracnghiem.Class.Server;
 import com.hungnguyen2809.apptracnghiem.Class.StringURL;
 import com.hungnguyen2809.apptracnghiem.MainActivity;
 import com.hungnguyen2809.apptracnghiem.R;
@@ -34,16 +32,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 
 public class ManagerExampleActivity extends AppCompatActivity {
     ListView listQuestion;
     public AdapterQuestion adapterQuestion;
     public ArrayList<Question> arrayListQuestion;
-    ArrayList<Question> dataQuestionOnServer;
     final int REQUEST_CODE_ADD_QUESTION = 222;
     final int REQUEST_CODE_EDIT_QUESTION = 333;
     int location = -1;
@@ -56,8 +50,6 @@ public class ManagerExampleActivity extends AppCompatActivity {
         arrayListQuestion = new ArrayList<>();
         adapterQuestion = new AdapterQuestion(this, R.layout.line_layout_custom_question, arrayListQuestion);
         listQuestion.setAdapter(adapterQuestion);
-
-        dataQuestionOnServer = new ArrayList<>();
 
         UpdateData();
         registerForContextMenu(listQuestion);
@@ -141,61 +133,24 @@ public class ManagerExampleActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void SyncQuestionOnAllDevice(ArrayList<Question> arrayQuestion) {
-       for (Question question : arrayQuestion){
-           StringWriter output = new StringWriter();
-           try {
-               WriteObjectQuestionToJson(output, question);
-               Server.mySocket.emit("client-send-all-question", output);
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-       }
-
-    }
-
-    private void WriteObjectQuestionToJson(Writer output, Question question) throws IOException{
-        JsonWriter jsonWriter = new JsonWriter(output);
-        jsonWriter.beginObject();
-        jsonWriter.name("Content").value(question.getContentQuestion());
-        jsonWriter.name("AnswerA").value(question.getContentA());
-        jsonWriter.name("AnswerB").value(question.getContentB());
-        jsonWriter.name("AnswerC").value(question.getContentC());
-        jsonWriter.name("AnswerD").value(question.getContentD());
-        jsonWriter.name("AnswerResult").value(question.getResultQuestion());
-        jsonWriter.endObject();
-    }
-
     private void DeleteAllQuestion() {
         AlertDialog.Builder delete = new AlertDialog.Builder(this);
         delete.setTitle("Cảnh báo !");
-        delete.setMessage("Bạn có chắc muốn xóa tất cả các câu hỏi hiện tại không ?\nVà tất cẩ những máy khác có liên kết đều xẽ bị xóa toàn bộ câu hỏi ?");
+        delete.setMessage("Bạn có chắc muốn xóa tất cả các câu hỏi hiện tại không ?");
         delete.setPositiveButton("Xóa tất cả", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.database.DeleteAllQuestion();
-                DeleteAllQuestionAllDevice("delete");
                 UpdateData();
             }
         });
-        delete.setPositiveButton("Chỉ máy hiện tại", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MainActivity.database.DeleteAllQuestion();
-                DeleteAllQuestionAllDevice("xxx");
-                UpdateData();
-            }
-        });
+
         delete.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
         delete.show();
-    }
-
-    private void DeleteAllQuestionAllDevice(String query){
-        Server.mySocket.emit("delete-all-question", query);
     }
 
     private void AddAllQuestionOnServer(String url) {
@@ -215,12 +170,12 @@ public class ManagerExampleActivity extends AppCompatActivity {
                                 String d = question.getString("AnswerD");
                                 String res = question.getString("AnswerRes");
                                 Question qs = new Question(content, a, b, c, d, res);
-                                dataQuestionOnServer.add(qs);
+                                MainActivity.database.InsertQuestion(qs);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        SyncQuestionOnAllDevice(dataQuestionOnServer);
+                        UpdateData();
                     }
                 },
                 new Response.ErrorListener() {
@@ -230,7 +185,6 @@ public class ManagerExampleActivity extends AppCompatActivity {
                     }
                 });
         requestQueue.add(stringRequest);
-        UpdateData();
     }
 
     private void DeleteQuestion(){
@@ -263,10 +217,6 @@ public class ManagerExampleActivity extends AppCompatActivity {
             arrayListQuestion.add(question);
         }
         adapterQuestion.notifyDataSetChanged();
-        Test();
     }
 
-    private void Test(){
-        Toast.makeText(this,MainActivity.demo , Toast.LENGTH_SHORT).show();
-    }
 }
