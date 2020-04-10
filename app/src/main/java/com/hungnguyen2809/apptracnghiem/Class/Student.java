@@ -1,10 +1,14 @@
 package com.hungnguyen2809.apptracnghiem.Class;
 
+import androidx.annotation.NonNull;
+
 public class Student {
     private String msv;
     private String name;
     private String lop;
     private int countAnswer;
+
+    public Student(){}
 
     public Student(String msv, String name, String lop, int countAnswer) {
         this.msv = msv;
@@ -44,4 +48,16 @@ public class Student {
     public void setCountAnswer(int countAnswer) {
         this.countAnswer = countAnswer;
     }
+
+    /*@NonNull
+    @Override
+    public String toString() {
+        StringBuffer data = new StringBuffer();
+        *//*data.append("{\"MSV\": \""+ this.msv +"\", ");
+        data.append("\"Name\": \""+ this.name +"\", ");
+        data.append("\"Lop\": \""+ this.lop +"\", ");
+        data.append("\"Point\": " + this.countAnswer + " }");*//*
+        data.append("{ \"MSV\": ");
+        return data.toString();
+    }*/
 }
