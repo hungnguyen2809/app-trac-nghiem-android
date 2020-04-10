@@ -156,7 +156,6 @@ public class ManagerStudentActivity extends AppCompatActivity {
         }
     }
 
-
     private void ReadAllClassFromServer(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest requestAllClass = new JsonArrayRequest(Request.Method.GET, url, null,

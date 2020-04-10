@@ -95,11 +95,11 @@ public class ExampleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkWorkExam()){
                     String mes = "Bạn có chắc muốn nộp bài ?";
-                    Dialog(mes);
+                    DialogSubmit(mes);
                 }
                 else {
                     String mes = "Bạn chưa hoàn thành tất cả các câu hỏi bạn có chắc muốn nộp ?";
-                    Dialog(mes);
+                    DialogSubmit(mes);
                 }
             }
         });
@@ -112,7 +112,7 @@ public class ExampleActivity extends AppCompatActivity {
         });
     }
 
-    private void Dialog(String mes){
+    private void DialogSubmit(String mes){
         AlertDialog.Builder dialogAccept = new AlertDialog.Builder(ExampleActivity.this);
         dialogAccept.setTitle("Thông báo !");
         dialogAccept.setMessage(mes);
@@ -137,7 +137,7 @@ public class ExampleActivity extends AppCompatActivity {
         startActivity(intent);
         if (!MainActivity.MarkLogin.equals("admin")){
             MainActivity.database.UpdatePointStudent(ResultExam(), MainActivity.MarkLogin);
-            //UpdatePointOnServer(StringURL.urlUpdatePointForStudent, MainActivity.MarkLogin, classLogin, ResultExam());
+            UpdatePointOnServer(StringURL.urlUpdatePointForStudent, MainActivity.MarkLogin, classLogin, ResultExam());
         }
         ExampleActivity.this.finish();
     }

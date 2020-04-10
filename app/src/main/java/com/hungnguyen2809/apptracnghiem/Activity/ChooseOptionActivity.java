@@ -31,7 +31,8 @@ public class ChooseOptionActivity extends AppCompatActivity {
         Mapping();
 
         listQuestion = new ArrayList<>();
-        listQuestion = MainActivity.database.GetAllDataQuestion();
+
+        AddQuestion();
         SecureInformation();
 
         btStartExample.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,10 @@ public class ChooseOptionActivity extends AppCompatActivity {
 
     }
 
+    private void AddQuestion(){
+        listQuestion = MainActivity.database.GetAllDataQuestion();
+    }
+
     private void SecureInformation(){
         if (MainActivity.MarkLogin.equals("admin")){
             btManagerStudent.setVisibility(View.VISIBLE);
@@ -87,6 +92,7 @@ public class ChooseOptionActivity extends AppCompatActivity {
             btManagerExample.setVisibility(View.INVISIBLE);
         }
     }
+
     private boolean CheckedLogin(){
         if (MainActivity.CheckedFirst.equals(ResultExamActivity.CheckedLast)){
             return true;

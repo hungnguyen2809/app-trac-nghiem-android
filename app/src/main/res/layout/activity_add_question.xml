@@ -34,7 +34,7 @@
 
     <TextView
         android:textStyle="bold"
-        android:textColor="#6E5407"
+        android:textColor="#BC431D"
         android:gravity="center"
         android:textAllCaps="true"
         android:textSize="30sp"

@@ -1,196 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10"
     android:padding="10dp"
-    android:background="#C6B582"
+    android:background="@android:color/holo_orange_light"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:textColor="#6E5407"
+        android:textColor="@android:color/holo_red_dark"
+        android:gravity="center"
         android:textStyle="bold"
+        android:textAllCaps="true"
         android:textSize="30sp"
-        android:textAllCaps="true"
-        android:gravity="center"
-        android:id="@+id/textView2"
-        android:text="Trắc nghiệm tiếng việt"
-        android:layout_height="0dp"
+        android:id="@+id/textView14"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        />
+        android:layout_height="wrap_content"
+        android:text="Trắc nghiệm kiến thức"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textColor="#0A8579"
-        android:gravity="center"
-        android:textAllCaps="true"
-        android:textSize="28sp"
         android:id="@+id/textViewCauHoi"
-        android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="Câu số 1"
-       />
+        android:textAllCaps="true"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <TextView
-        android:textColor="#A54223"
-        android:id="@+id/textViewNoiDungCauHoi"
-        android:padding="15dp"
-        android:text="Ai la nguoi tim ra chay Au"
-        android:textSize="28sp"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="horizontal"
-        android:weightSum="6">
-        <LinearLayout
-            android:orientation="vertical"
-            android:weightSum="4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:gravity="center"
-                android:textColor="@android:color/background_dark"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="A : "/>
-            <TextView
-                android:gravity="center"
-                android:textColor="@android:color/background_dark"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="B : "/>
-            <TextView
-                android:gravity="center"
-                android:textColor="@android:color/background_dark"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="C : "/>
-            <TextView
-                android:gravity="center"
-                android:textColor="@android:color/background_dark"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="D : "/>
-
-        </LinearLayout>
-
-        <RadioGroup
-            android:id="@+id/radioGroupAnswer"
-            android:weightSum="4"
-            android:layout_weight="5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" >
-            <RadioButton
-                android:gravity="center_vertical"
-                android:textSize="22sp"
-                android:text="Radio Button"
-                android:id="@+id/radioButtonA"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-            <RadioButton
-                android:gravity="center_vertical"
-                android:textSize="22sp"
-                android:text="Radio Button"
-                android:id="@+id/radioButtonB"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <RadioButton
-                android:gravity="center_vertical"
-                android:textSize="22sp"
-                android:text="Radio Button"
-                android:id="@+id/radioButtonC"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <RadioButton
-                android:gravity="center_vertical"
-                android:textSize="22sp"
-                android:text="Radio Button"
-                android:id="@+id/radioButtonD"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-        </RadioGroup>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <LinearLayout
-        android:padding="5dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="5">
-
-        <Button
-            android:id="@+id/buttonExamBack"
-            android:text="back"
-            android:textSize="18sp"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCauHoi">
 
         <TextView
+            android:id="@+id/textViewNoiDungCauHoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="Ai là người tìm ra châu Âu ?"
+            android:textSize="22sp" />
+    </ScrollView>
+
+    <RadioGroup
+        android:id="@+id/radioGroupAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp"
+        android:weightSum="4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+        <RadioButton
+            android:id="@+id/radioButtonA"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+            android:text="RadioButton"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/buttonExamNext"
-            android:textSize="18sp"
-            android:text="next"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"/>
+        <RadioButton
+            android:id="@+id/radioButtonB"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="RadioButton"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/radioButtonC"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="RadioButton"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonD"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="RadioButton"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </RadioGroup>
 
     <LinearLayout
-        android:padding="5dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="12">
+        android:weightSum="4"
+        android:layout_marginTop="10dp"
+        android:layout_width="58dp"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"/>
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="A: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-        <Button
-            android:id="@+id/buttonExamSubmit"
-            android:textSize="18sp"
-            android:text="Submit"
-            android:layout_weight="4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="B: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="C: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+        <TextView
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="D: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
     </LinearLayout>
 
-</LinearLayout>
+    <Button
+        android:background="@drawable/custom_buttom_exam"
+        android:id="@+id/buttonExamBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Quay lại"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupAnswer" />
+
+    <Button
+        android:background="@drawable/custom_buttom_exam"
+        android:id="@+id/buttonExamNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Câu tiếp"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupAnswer" />
+
+    <Button
+        android:background="@drawable/custom_buttom_exam"
+        android:id="@+id/buttonExamSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Nộp bài thi "
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupAnswer" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
