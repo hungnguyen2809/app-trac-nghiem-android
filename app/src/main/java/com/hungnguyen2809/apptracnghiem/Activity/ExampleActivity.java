@@ -76,6 +76,7 @@ public class ExampleActivity extends AppCompatActivity {
                 radioAnswerNotCheck();
                 responsiveAnswer();
                 disableButtonBackNext();
+                Toast.makeText(ExampleActivity.this, arrMeetQuestion[location] + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,6 +88,7 @@ public class ExampleActivity extends AppCompatActivity {
                 radioAnswerNotCheck();
                 responsiveAnswer();
                 disableButtonBackNext();
+                Toast.makeText(ExampleActivity.this, arrMeetQuestion[location] + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,10 +106,42 @@ public class ExampleActivity extends AppCompatActivity {
             }
         });
 
-        radioGroupAnswer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        /*radioGroupAnswer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 ChooserAnswer();
+            }
+        });*/
+        radioA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listAnswer[location] = "A";
+                radioA.setChecked(true);
+                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
+            }
+        });
+        radioB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listAnswer[location] = "B";
+                radioB.setChecked(true);
+                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
+            }
+        });
+        radioC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listAnswer[location] = "C";
+                radioC.setChecked(true);
+                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
+            }
+        });
+        radioD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listAnswer[location] = "D";
+                radioD.setChecked(true);
+                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -161,28 +195,14 @@ public class ExampleActivity extends AppCompatActivity {
     }
 
     private void radioAnswerNotCheck(){
-        if (arrMeetQuestion[location] == false){
+        if (!arrMeetQuestion[location]){
             radioA.setChecked(false);
             radioB.setChecked(false);
             radioC.setChecked(false);
             radioD.setChecked(false);
-            arrMeetQuestion[location] = true;
-        }
-    }
-
-    private void disableButtonBackNext(){
-        if (location == 0){
-            btBack.setEnabled(false);
-        }
-        else{
-            btBack.setEnabled(true);
-        }
-
-        if (location >= listQuestion.size() - 1){
-            btNext.setEnabled(false);
-        }
-        else {
-            btNext.setEnabled(true);
+            if (radioA.isChecked() || radioB.isChecked() || radioC.isChecked() || radioD.isChecked()){
+                arrMeetQuestion[location] = true;
+            }
         }
     }
 
@@ -203,7 +223,7 @@ public class ExampleActivity extends AppCompatActivity {
         }
     }
 
-    private void ChooserAnswer(){
+    /*private void ChooserAnswer(){
         String answer = "";
         if (radioA.isChecked()){
             answer = "A";
@@ -218,6 +238,23 @@ public class ExampleActivity extends AppCompatActivity {
             answer = "D";
         }
         listAnswer[location] = answer;
+        Toast.makeText(this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
+    }*/
+
+    private void disableButtonBackNext(){
+        if (location == 0){
+            btBack.setEnabled(false);
+        }
+        else{
+            btBack.setEnabled(true);
+        }
+
+        if (location >= listQuestion.size() - 1){
+            btNext.setEnabled(false);
+        }
+        else {
+            btNext.setEnabled(true);
+        }
     }
 
     private void Mapping() {
