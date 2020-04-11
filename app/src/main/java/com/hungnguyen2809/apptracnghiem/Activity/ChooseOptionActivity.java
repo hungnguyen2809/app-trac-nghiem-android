@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,9 +54,22 @@ public class ChooseOptionActivity extends AppCompatActivity {
                     Toast.makeText(ChooseOptionActivity.this, "Bạn đã thi rồi không được phép thi lại !", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent startExam = new Intent(ChooseOptionActivity.this, ExampleActivity.class);
-                    startActivity(startExam);
-                    ChooseOptionActivity.this.finish();
+                    AlertDialog.Builder startExam = new AlertDialog.Builder(ChooseOptionActivity.this);
+                    startExam.setTitle("Thông báo !");
+                    startExam.setMessage("Bạn đã sẵn sàng bắt đầu thi !");
+                    startExam.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent startExam = new Intent(ChooseOptionActivity.this, ExampleActivity.class);
+                            startActivity(startExam);
+                        }
+                    });
+                    startExam.setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    startExam.show();
                 }
             }
         });
@@ -79,7 +93,9 @@ public class ChooseOptionActivity extends AppCompatActivity {
     }
 
     private void AddQuestion(){
-        listQuestion = MainActivity.database.GetAllDataQuestion();
+        if (MainActivity.database.GetAllDataQuestion().size() != 0){
+            listQuestion = MainActivity.database.GetAllDataQuestion();
+        }
     }
 
     private void SecureInformation(){

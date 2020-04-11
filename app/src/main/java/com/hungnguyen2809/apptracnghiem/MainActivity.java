@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static Database database;
     public static String MarkLogin = "";
     public static String CheckedFirst = "";
+    public static int timeExam = 45;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (LoginAdmin() || LoginUserStudent()){
+                String user = edtUsername.getText().toString().trim();
+                String pass = edtPassword.getText().toString().trim();
+                if (isStringOnlyAlphabets(user) == false || isStringOnlyAlphabets(pass) == false) {
+                    Toast.makeText(MainActivity.this, "Thông tin đăng nhập chỉ gồm chữ cái và số !\nVà không được rỗng !", Toast.LENGTH_SHORT).show();
+                } else if (LoginAdmin() || LoginUserStudent()) {
                     Intent login = new Intent(MainActivity.this, ChooseOptionActivity.class);
                     startActivity(login);
-                    MarkLogin = edtUsername.getText().toString().trim();
-                    CheckedFirst = edtPassword.getText().toString().trim();
-                }
-                else {
+                    MarkLogin = user;
+                    CheckedFirst = pass;
+                } else {
                     Toast.makeText(MainActivity.this, "Thông tin đăng nhập không đúng !", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -58,37 +62,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private boolean LoginAdmin(){
+    private boolean LoginAdmin() {
         String user = edtUsername.getText().toString().trim();
         String pass = edtPassword.getText().toString().trim();
-        for (Account ac : database.GetUserAdmin()){
-            if (user.equals(ac.getUser()) && pass.equals(ac.getPass())){
+        for (Account ac : database.GetUserAdmin()) {
+            if (user.equals(ac.getUser()) && pass.equals(ac.getPass())) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean LoginUserStudent(){
+    private boolean LoginUserStudent() {
         String user = edtUsername.getText().toString().trim();
         String pass = edtPassword.getText().toString().trim();
-        for (Account student : database.GetUserStudent()){
-            if (user.equals(student.getUser()) && pass.equals(student.getPass())){
-                return  true;
+        for (Account student : database.GetUserStudent()) {
+            if (user.equals(student.getUser()) && pass.equals(student.getPass())) {
+                return true;
             }
         }
-        return  false;
+        return false;
     }
 
-    private void Mapping(){
+    private void Mapping() {
         edtUsername = (EditText) findViewById(R.id.edtUserName);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         btLogin = (Button) findViewById(R.id.buttonLogin);
         btCancel = (Button) findViewById(R.id.buttonCancel);
     }
 
-    private void AddUserAdmin(){
-        if (database.GetUserAdmin().size() == 0){
+    private void AddUserAdmin() {
+        if (database.GetUserAdmin().size() == 0) {
             String sql = "INSERT INTO " + Database.tblAdmin + " VALUES ( 'admin', 'admin' )";
             database.SQLNonResultData(sql);
         }
@@ -100,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
         edtPassword.setText("");
         ResultExamActivity.isCheckedExam = false;
         super.onResume();
+    }
+
+    private boolean isStringOnlyAlphabets(String str) {
+        return (str != null && !str.equals("") && str.matches("^[A-Z a-z 0-9]*$"));
     }
 
 }

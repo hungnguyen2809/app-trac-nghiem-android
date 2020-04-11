@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -129,8 +133,47 @@ public class ManagerExampleActivity extends AppCompatActivity {
             case R.id.menu_delete_all_question:
                 DeleteAllQuestion();
                 break;
+            case R.id.menu_set_time:
+                SetTimeExam();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void SetTimeExam(){
+        final Dialog dialogSetTine = new Dialog(this);
+        dialogSetTine.setContentView(R.layout.layout_set_time_exam);
+        dialogSetTine.setCanceledOnTouchOutside(false);
+
+        final EditText edtSetTime = (EditText) dialogSetTine.findViewById(R.id.editTextSetTimeExam);
+        Button btAccept = (Button) dialogSetTine.findViewById(R.id.buttonAcceptTime);
+        Button btCancel = (Button) dialogSetTine.findViewById(R.id.buttonCancelTime);
+        edtSetTime.setText(MainActivity.timeExam + "");
+
+        btAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isStringOnlyDigits(edtSetTime.getText().toString().trim())){
+                    Toast.makeText(ManagerExampleActivity.this, "Thời gian không được để trống ! Và nó phải là một số nguyên !", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    MainActivity.timeExam = Integer.parseInt(edtSetTime.getText().toString().trim());
+                    Toast.makeText(ManagerExampleActivity.this, "Bạn đã cài thời gian thi là: " + edtSetTime.getText().toString(), Toast.LENGTH_SHORT).show();
+                    dialogSetTine.cancel();
+                }
+            }
+        });
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSetTine.cancel();
+            }
+        });
+        dialogSetTine.show();
+    }
+
+    private  boolean isStringOnlyDigits(String str){
+        return ((str != null) && (!str.equals("")) && (str.matches("[0-9]+")));
     }
 
     private void DeleteAllQuestion() {

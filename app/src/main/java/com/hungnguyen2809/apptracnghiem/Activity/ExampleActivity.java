@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -36,16 +37,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExampleActivity extends AppCompatActivity {
+public class ExampleActivity extends AppCompatActivity{
     RadioButton radioA, radioB, radioC, radioD;
     Button btBack, btNext, btSubmit;
-    TextView txtIndexQuestion, txtContentQuestion;
+    TextView txtIndexQuestion, txtContentQuestion, txtTime;
     RadioGroup radioGroupAnswer;
     int location = -1;
     ArrayList<Question> listQuestion;
     String[] listAnswer;
     Boolean[] arrMeetQuestion;
     String classLogin = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +56,17 @@ public class ExampleActivity extends AppCompatActivity {
         Mapping();
         listQuestion = new ArrayList<>();
         AddData();
+        CountTimeExam();
 
         listAnswer = new String[listQuestion.size()];
         Arrays.fill(listAnswer, null);
 
         arrMeetQuestion = new Boolean[listQuestion.size()];
         Arrays.fill(arrMeetQuestion, false);
-
         SetQuestion(listQuestion.get(location));
 
-        btBack.setEnabled(false);
+        disableButtonBackNext();
         radioAnswerNotCheck();
-
         GetInformationOfStudent();
 
         btNext.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +77,6 @@ public class ExampleActivity extends AppCompatActivity {
                 radioAnswerNotCheck();
                 responsiveAnswer();
                 disableButtonBackNext();
-                Toast.makeText(ExampleActivity.this, arrMeetQuestion[location] + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -88,7 +88,6 @@ public class ExampleActivity extends AppCompatActivity {
                 radioAnswerNotCheck();
                 responsiveAnswer();
                 disableButtonBackNext();
-                Toast.makeText(ExampleActivity.this, arrMeetQuestion[location] + "", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -106,42 +105,28 @@ public class ExampleActivity extends AppCompatActivity {
             }
         });
 
-        /*radioGroupAnswer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                ChooserAnswer();
-            }
-        });*/
         radioA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listAnswer[location] = "A";
-                radioA.setChecked(true);
-                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
             }
         });
         radioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listAnswer[location] = "B";
-                radioB.setChecked(true);
-                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
             }
         });
         radioC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listAnswer[location] = "C";
-                radioC.setChecked(true);
-                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
             }
         });
         radioD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listAnswer[location] = "D";
-                radioD.setChecked(true);
-                Toast.makeText(ExampleActivity.this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -223,24 +208,6 @@ public class ExampleActivity extends AppCompatActivity {
         }
     }
 
-    /*private void ChooserAnswer(){
-        String answer = "";
-        if (radioA.isChecked()){
-            answer = "A";
-        }
-        if (radioB.isChecked()){
-            answer = "B";
-        }
-        if (radioC.isChecked()){
-            answer = "C";
-        }
-        if (radioD.isChecked()){
-            answer = "D";
-        }
-        listAnswer[location] = answer;
-        Toast.makeText(this, location + " " + listAnswer[location], Toast.LENGTH_SHORT).show();
-    }*/
-
     private void disableButtonBackNext(){
         if (location == 0){
             btBack.setEnabled(false);
@@ -248,8 +215,7 @@ public class ExampleActivity extends AppCompatActivity {
         else{
             btBack.setEnabled(true);
         }
-
-        if (location >= listQuestion.size() - 1){
+        if (location >= listQuestion.size() - 1 || listQuestion.size() == 1){
             btNext.setEnabled(false);
         }
         else {
@@ -268,6 +234,7 @@ public class ExampleActivity extends AppCompatActivity {
         txtIndexQuestion = (TextView) findViewById(R.id.textViewCauHoi);
         txtContentQuestion = (TextView) findViewById(R.id.textViewNoiDungCauHoi);
         radioGroupAnswer = (RadioGroup) findViewById(R.id.radioGroupAnswer);
+        txtTime = (TextView) findViewById(R.id.textViewTime);
 
         location = 0;
     }
@@ -328,4 +295,19 @@ public class ExampleActivity extends AppCompatActivity {
         }
     }
 
+    private void CountTimeExam(){
+        CountDownTimer time = new CountDownTimer(MainActivity.timeExam * 60 * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long timeNow = millisUntilFinished / 1000;
+                txtTime.setText(timeNow / 60 + " : " + (timeNow % 60));
+            }
+            @Override
+            public void onFinish() {
+                Toast.makeText(ExampleActivity.this, "Bạn đã hết thời gian làm bài thi !", Toast.LENGTH_SHORT).show();
+                EndActivityExam();
+            }
+        };
+        time.start();
+    }
 }
