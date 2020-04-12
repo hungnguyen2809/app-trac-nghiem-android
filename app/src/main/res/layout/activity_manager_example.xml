@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#23CFE4"
+    android:background="#EBF5FB"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/holo_red_light"
         android:layout_marginTop="18dp"
         android:textStyle="bold"
         android:textSize="28sp"
@@ -23,6 +23,6 @@
         android:id="@+id/listViewDanhSachCauHoi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="30dp" />
 
 </LinearLayout>

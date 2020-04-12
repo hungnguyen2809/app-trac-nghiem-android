@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    android:background="#C6B582"
+    android:background="#EBF5FB"
     tools:context=".Activity.AddQuestionActivity">
 
     <EditText
+        android:textColor="@android:color/background_dark"
         android:id="@+id/editTextAnswerD"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
@@ -21,12 +22,13 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextAnswerC" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:gravity="center"
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="D."
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +36,7 @@
 
     <TextView
         android:textStyle="bold"
-        android:textColor="#BC431D"
+        android:textColor="#D35400"
         android:gravity="center"
         android:textAllCaps="true"
         android:textSize="30sp"
@@ -47,6 +49,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,6 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <EditText
+            android:textColor="@android:color/background_dark"
             android:id="@+id/editTextContentQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +78,7 @@
     </ScrollView>
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,45 +89,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:gravity="center"
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="A."
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:gravity="center"
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="B."
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
+        android:textColor="@android:color/background_dark"
         android:textSize="20sp"
         android:id="@+id/editTextAnswerA"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
+        android:textColor="@android:color/background_dark"
         android:id="@+id/editTextAnswerB"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
@@ -130,11 +139,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextAnswerA" />
 
     <EditText
+        android:textColor="@android:color/background_dark"
         android:id="@+id/editTextAnswerC"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
@@ -142,34 +152,37 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:gravity="center"
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="C."
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="Đáp án câu hỏi:"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
+        android:textColor="@android:color/background_dark"
         android:gravity="center"
         android:id="@+id/editTextResultQuestion"
         android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
@@ -177,11 +190,11 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextAnswerB" />
 
     <Button
-        android:background="#FFEB3B"
+        android:background="#F9E79F"
         android:id="@+id/buttonCancelAddQuestion"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
         android:text="hủy hỏ"
         android:textSize="15dp"
@@ -189,12 +202,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextResultQuestion" />
 
     <Button
-        android:background="#FFEB3B"
+        android:background="#F9E79F"
         android:id="@+id/buttonAcceptAddQuestion"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="30dp"
         android:text="Xác nhận"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"

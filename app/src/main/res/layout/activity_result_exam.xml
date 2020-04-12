@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C6B582"
+    android:background="#EBF5FB"
     android:padding="10dp"
     tools:context=".Activity.ResultExamActivity">
 
@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Trắc nghiệm tiếng việt"
+        android:text="Trắc nghiệm kiến thức"
         android:textAllCaps="true"
-        android:textColor="#6E5407"
+        android:textColor="#E67E22"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:id="@+id/textViewResultExam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -156,7 +156,7 @@ public class ExampleActivity extends AppCompatActivity{
         startActivity(intent);
         if (!MainActivity.MarkLogin.equals("admin")){
             MainActivity.database.UpdatePointStudent(ResultExam(), MainActivity.MarkLogin);
-            UpdatePointOnServer(StringURL.urlUpdatePointForStudent, MainActivity.MarkLogin, classLogin, ResultExam());
+            //UpdatePointOnServer(StringURL.urlUpdatePointForStudent, MainActivity.MarkLogin, classLogin, ResultExam());
         }
         ExampleActivity.this.finish();
     }

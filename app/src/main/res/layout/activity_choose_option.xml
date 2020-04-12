@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#C6B582"
+    android:background="#EBF5FB"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
-        android:background="#8DAE7A6A"
+        android:background="#FCF3CF"
         android:id="@+id/buttonStartExam"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -15,7 +15,7 @@
         android:layout_marginTop="140dp"
         android:layout_marginEnd="50dp"
         android:text="Bắt đầu thi"
-        android:textSize="22sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,7 +30,7 @@
         android:gravity="center"
         android:text="Trắc nghiệm kiến thức"
         android:textAllCaps="true"
-        android:textColor="#6E5407"
+        android:textColor="#E67E22"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:background="#8DAE7A6A"
+        android:background="#E4CAA3"
         android:id="@+id/buttonDeThi"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonStartExam" />
 
     <Button
-        android:background="#8DAE7A6A"
+        android:background="#E4CAA3"
         android:id="@+id/buttonQLHocSinh"
         android:layout_width="match_parent"
         android:layout_height="50dp"

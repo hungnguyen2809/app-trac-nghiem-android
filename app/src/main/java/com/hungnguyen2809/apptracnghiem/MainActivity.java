@@ -38,19 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = edtUsername.getText().toString().trim();
-                String pass = edtPassword.getText().toString().trim();
-                if (isStringOnlyAlphabets(user) == false || isStringOnlyAlphabets(pass) == false) {
-                    Toast.makeText(MainActivity.this, "Thông tin đăng nhập chỉ gồm chữ cái và số !\nVà không được rỗng !", Toast.LENGTH_SHORT).show();
-                } else if (LoginAdmin() || LoginUserStudent()) {
-                    Intent login = new Intent(MainActivity.this, ChooseOptionActivity.class);
-                    startActivity(login);
-                    overridePendingTransition(R.anim.anim_login_out, R.anim.anim_login_in);
-                    MarkLogin = user;
-                    CheckedFirst = pass;
-                } else {
-                    Toast.makeText(MainActivity.this, "Thông tin đăng nhập không đúng !", Toast.LENGTH_SHORT).show();
-                }
+                AcceptLogin();
             }
         });
 
@@ -61,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
                 edtPassword.setText("");
             }
         });
+    }
+
+    private void AcceptLogin() {
+        String user = edtUsername.getText().toString().trim();
+        String pass = edtPassword.getText().toString().trim();
+        if (isStringOnlyAlphabets(user) == false || isStringOnlyAlphabets(pass) == false) {
+            Toast.makeText(MainActivity.this, "Thông tin đăng nhập chỉ gồm chữ cái và số !\nVà không được rỗng !", Toast.LENGTH_SHORT).show();
+        } else if (LoginAdmin() || LoginUserStudent()) {
+            Intent login = new Intent(MainActivity.this, ChooseOptionActivity.class);
+            startActivity(login);
+            overridePendingTransition(R.anim.anim_login_out, R.anim.anim_login_in);
+            MarkLogin = user;
+            CheckedFirst = pass;
+        } else {
+            Toast.makeText(MainActivity.this, "Thông tin đăng nhập không đúng !", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean LoginAdmin() {

@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#EBF5FB"
     android:padding="10dp">
 
     <TextView
+        android:textColor="#17202A"
         android:gravity="center"
         android:textAllCaps="true"
         android:textSize="25sp"
@@ -20,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:background="#F6DDCC"
         android:id="@+id/buttonAcceptTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextSetTimeExam" />
 
     <Button
+        android:background="#F6DDCC"
         android:id="@+id/buttonCancelTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +50,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Nhập vào số phút cho bài thi"
+        android:hint="Nhập vào số phút thi"
         android:inputType="textPersonName"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

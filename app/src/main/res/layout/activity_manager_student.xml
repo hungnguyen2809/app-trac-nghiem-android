@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="#E3D132"
+    android:background="#EBF5FB"
     tools:context=".Activity.ManagerStudentActivity">
 
 
@@ -39,13 +39,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
+        android:textColor="@android:color/background_dark"
         android:id="@+id/textViewLop"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginTop="28dp"
         android:gravity="center"
         android:text="Danh sách trống !"
-        android:textSize="25sp"
+        android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 </androidx.constraintlayout.widget.ConstraintLayout>
