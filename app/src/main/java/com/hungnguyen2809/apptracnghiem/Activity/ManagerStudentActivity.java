@@ -203,7 +203,6 @@ public class ManagerStudentActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.database.DeleteAllStudent();
-                txtLop.setText("Danh sách lớp đang trống !");
                 Toast.makeText(ManagerStudentActivity.this, "Xóa thành công !", Toast.LENGTH_SHORT).show();
                 finish();
             }

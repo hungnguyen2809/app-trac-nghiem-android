@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -63,6 +65,9 @@ public class AdapterStudent extends BaseAdapter {
         holder.txtMSV.setText("MSV: " + student.getMsv());
         holder.txtName.setText("Họ tên: " + student.getName());
         holder.txtCountAnswer.setText("Số câu trả lời đúng: " + student.getCountAnswer());
+
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.anim_list_student);
+        convertView.startAnimation(animation);
 
         return convertView;
     }

@@ -36,7 +36,7 @@ public class ResultExamActivity extends AppCompatActivity {
                 Intent intent = new Intent(ResultExamActivity.this, ChooseOptionActivity.class);
                 startActivity(intent);
                 isCheckedExam = true;
-                CheckedLast = MainActivity.MarkLogin;
+                CheckedLast = MainActivity.CheckedFirst;
                 ResultExamActivity.this.finish();
             }
         });

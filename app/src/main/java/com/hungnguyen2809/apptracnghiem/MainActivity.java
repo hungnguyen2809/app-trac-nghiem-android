@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (LoginAdmin() || LoginUserStudent()) {
                     Intent login = new Intent(MainActivity.this, ChooseOptionActivity.class);
                     startActivity(login);
+                    overridePendingTransition(R.anim.anim_login_out, R.anim.anim_login_in);
                     MarkLogin = user;
                     CheckedFirst = pass;
                 } else {
