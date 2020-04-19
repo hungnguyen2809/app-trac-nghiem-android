@@ -7,12 +7,15 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +45,7 @@ import java.util.Map;
 public class ManagerStudentActivity extends AppCompatActivity {
     ListView listViewStudent;
     TextView txtLop;
+    EditText edtSearch;
     ArrayList<Student> dsStudent;
     AdapterStudent adapterStudent;
     ArrayList<String> listClassName;
@@ -60,7 +64,29 @@ public class ManagerStudentActivity extends AppCompatActivity {
         dsStudentWhereClass = new ArrayList<>();
 
         AddData();
+        EnableSearch();
+        FilterStudent();
         ReadAllClassFromServer(StringURL.urlGetAllClass);
+    }
+
+    private void FilterStudent(){
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapterStudent.filterStudent().filter(s);
+                adapterStudent.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -80,6 +106,16 @@ public class ManagerStudentActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void EnableSearch(){
+        if (MainActivity.database.GetAllDataStudent().size() == 0){
+            edtSearch.setVisibility(View.INVISIBLE);
+            listViewStudent.layout(0, 120, 0, 0);
+        }else {
+            edtSearch.setVisibility(View.VISIBLE);
+            listViewStudent.layout(0, 180, 0, 0);
+        }
     }
 
     private void GetAllStudentFromClass(String url, final String lop, final int position){
@@ -153,6 +189,7 @@ public class ManagerStudentActivity extends AppCompatActivity {
             }
             txtLop.setText("Danh sách lớp: " + lop);
             UpdateData();
+            EnableSearch();
         }
     }
 
@@ -238,6 +275,7 @@ public class ManagerStudentActivity extends AppCompatActivity {
     private void Mapping(){
         listViewStudent = (ListView) findViewById(R.id.listViewStudent);
         txtLop = (TextView) findViewById(R.id.textViewLop);
+        edtSearch = (EditText) findViewById(R.id.editTextSearch);
     }
 
 }

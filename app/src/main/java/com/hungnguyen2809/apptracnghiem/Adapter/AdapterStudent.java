@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.hungnguyen2809.apptracnghiem.Class.Student;
@@ -18,6 +19,7 @@ public class AdapterStudent extends BaseAdapter {
     private Context context;
     private int layout;
     private ArrayList<Student> dsStudent;
+    private ArrayList<Student> dataBackup;
 
     public AdapterStudent(Context context, int layout, ArrayList<Student> dsStudent) {
         this.context = context;
@@ -42,6 +44,44 @@ public class AdapterStudent extends BaseAdapter {
 
     private class ViewHolder{
         TextView txtMSV, txtName, txtCountAnswer;
+    }
+
+    public Filter filterStudent(){
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                if (dataBackup == null){
+                    dataBackup = new ArrayList<>(dsStudent);
+                }
+                if (constraint.length() == 0 || constraint == null){
+                    filterResults.values = dataBackup;
+                    filterResults.count = dataBackup.size();
+                }
+                else {
+                    ArrayList<Student> dataNew = new ArrayList<>();
+                    for (Student st : dsStudent){
+                        if (st.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+                            dataNew.add(st);
+                        }
+                    }
+                    filterResults.values = dataNew;
+                    filterResults.count = dataNew.size();
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                ArrayList<Student> temp = (ArrayList<Student>) results.values;
+                dsStudent.clear();
+                for (Student st : temp){
+                    dsStudent.add(st);
+                }
+                notifyDataSetChanged();
+            }
+        };
+        return filter;
     }
 
     @Override

@@ -97,9 +97,7 @@ public class ChooseOptionActivity extends AppCompatActivity {
     }
 
     private void AddQuestion() {
-        if (MainActivity.database.GetAllDataQuestion().size() != 0) {
             listQuestion = MainActivity.database.GetAllDataQuestion();
-        }
     }
 
     private void SecureInformation() {
