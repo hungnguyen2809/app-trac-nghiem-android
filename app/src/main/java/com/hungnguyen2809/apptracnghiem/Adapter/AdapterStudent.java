@@ -61,7 +61,7 @@ public class AdapterStudent extends BaseAdapter {
                 else {
                     ArrayList<Student> dataNew = new ArrayList<>();
                     for (Student st : dsStudent){
-                        if (st.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+                        if (st.getName().trim().toLowerCase().contains(constraint.toString().trim().toLowerCase())){
                             dataNew.add(st);
                         }
                     }

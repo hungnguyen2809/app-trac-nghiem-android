@@ -172,8 +172,10 @@ public class ExampleActivity extends AppCompatActivity{
     private int ResultExam(){
         int count = 0;
         for (int index = 0; index < listQuestion.size(); index++){
-            if (listAnswer[index].trim().equals(listQuestion.get(index).getResultQuestion().trim())){
-                count++;
+            if (listAnswer[index] != null) {
+                if (listAnswer[index].trim().equals(listQuestion.get(index).getResultQuestion().trim())) {
+                    count++;
+                }
             }
         }
         return count;
